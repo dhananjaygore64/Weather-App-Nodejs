@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <div class="main-content">
+        {{>header}}
+        <p>{{message}}</p>
+        <form class="search-form">
+            <input type="text" placeholder="Pune">
+            <button>Search</button>
+        </form>
+        <br>
+        {{!-- <div class="info">
+            <img src="" class="weather-icon">
+            <p class="weather-msg" style="display: block;"></p>
+            <p class="error-msg" style="color: red;display:block;"></p>
+        </div>
+        <div class="location">
+            <p></p>
+        </div> --}}
+        <table>
+            <tr>
+                <td><img src="" class="weather-icon"></td>
+                <td><p class="weather-msg" style="display: block;"></p>
+                <p class="error-msg" style="color: red;display:block;"></p></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="location"><p></p></td>
+            </tr>
+        </table>
+    </div>
+    {{>footer}}
+</body>
+
+</html>
