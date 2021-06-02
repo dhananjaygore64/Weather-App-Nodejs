@@ -13,7 +13,7 @@ document.querySelector('.search-form').addEventListener('submit', (e) => {
     error.innerText = '';
     location.innerText = '';
     weatherIcon.style.display = 'none';
-    fetch(`http://localhost:3001/weather?address=${searchText}`).then((response) => {
+    fetch(`/weather?address=${searchText}`).then((response) => {
         response.json().then((data) => {
             if (data.error) {
                 error.innerText = data.error;

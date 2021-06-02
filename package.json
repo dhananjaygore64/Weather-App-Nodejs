@@ -1,17 +1,17 @@
 {
-  "name": "WheatherApp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"name": "WheatherApp",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+    "start":"node src/app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "hbs": "^4.1.2",
-    "postman-request": "^2.88.1-postman.30"
-  }
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"hbs": "^4.1.2",
+		"postman-request": "^2.88.1-postman.30"
+	}
 }
