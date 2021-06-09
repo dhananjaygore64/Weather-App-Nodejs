@@ -5,41 +5,167 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <link rel="icon" type="image/png" sizes="310x310" href="/img/favicons/ms-icon-310x310.png">
+    <link rel="stylesheet" href="/css/home.css">
     <script src="js/script.js" defer></script>
 </head>
 
 <body>
-    <div class="main-content">
+    <div class="container-fluid main">
         {{>header}}
-        <p>{{message}}</p>
-        <form class="search-form">
-            <input type="text" placeholder="Pune">
-            <button>Search</button>
-        </form>
-        <br>
-        {{!-- <div class="info">
-            <img src="" class="weather-icon">
-            <p class="weather-msg" style="display: block;"></p>
-            <p class="error-msg" style="color: red;display:block;"></p>
+        <div class="weather-details mt-4 mb-2">
+            <div class="alert alert-danger error-msg " style="opacity: 0;" role="alert">
+                A simple danger alert—check it out!
+            </div>
+            <div class="row justify-content-md-center">
+
+                <div class="col analytics px-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Wearther Analytics
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <td>Temp</td>
+                                <td id="table-temp">30.2</td>
+                                <td>&#8451;</td>
+                            </tr>
+                            <tr>
+                                <td>Wind speed</td>
+                                <td id="table-ws">11.2</td>
+                                <td>Kmph</td>
+                            </tr>
+                            <tr>
+                                <td>Wind direction</td>
+                                <td id="table-wd">WNW</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Humidity</td>
+                                <td id="table-humid">54</td>
+                                <td>%</td>
+                            </tr>
+                            <tr>
+                                <td>cloud</td>
+                                <td id="table-cloud">69</td>
+                                <td>%</td>
+                            </tr>
+                            <tr>
+                                <td>Is day</td>
+                                <td id="table-day">Yes</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>UV Index</td>
+                                <td id="table-uv">7</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Visibility</td>
+                                <td id="table-visi">8.7</td>
+                                <td>KM</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col form">
+                    <form action="">
+                        <div class="card input-form">
+                            <div class="input-group mb-2 mt-2">
+                                <input type="text" class="form-control shadow-none" placeholder="Location Name"
+                                    aria-label="Location Name" aria-describedby="button-addon2">
+                                <button type="submit" class="btn btn-outline-secondary shadow-none rounded-3"
+                                    type="button" id="button-addon2">Search</button>
+                            </div>
+                           <div id="map"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col forecast px-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Wearther Forecast
+                        </div>
+                        <table class="table table-striped table-hover text-center mt-2">
+                            <thead>
+                                <th></th>
+                                <th id="forecast-day0"><img src="https://cdn.weatherapi.com/weather/64x64/day/308.png">Today</th>
+                                <th id="forecast-day1"><img src="https://cdn.weatherapi.com/weather/64x64/day/308.png">Saturday</th>
+                                <th id="forecast-day2"><img src="https://cdn.weatherapi.com/weather/64x64/day/116.png">Sunday</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th style="width:20%">Temp &#8451; <br><h6 style="font-size: 90%;">(highest)</h6></th>
+                                    <td id="forecast-temp0">30.2</td>
+                                    <td id="forecast-temp1">30.2</td>
+                                    <td id="forecast-temp2">30.2</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td id="forecast-status0">Partly cloudy</td>
+                                    <td id="forecast-status1">Partly cloudy</td>
+                                    <td id="forecast-status2">Partly cloudy</td>
+                                </tr>
+                                <tr>
+                                    <th>Rain %</th>
+                                    <td id="forecast-rain0">84</td>
+                                    <td id="forecast-rain1">84</td>
+                                    <td id="forecast-rain2">84</td>
+                                </tr>
+                                <tr>
+                                    <th>Sunrise</th>
+                                    <td id="forecast-rise0">5:57 AM</td>
+                                    <td id="forecast-rise1">5:57 AM</td>
+                                    <td id="forecast-rise2">5:57 AM</td>
+                                </tr>
+                                <tr>
+                                    <th>Sunset</th>
+                                    <td id="forecast-set0">7:10 PM</td>
+                                    <td id="forecast-set1">7:10 PM</td>
+                                    <td id="forecast-set2">7:10 PM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="info px-5">
+                    <div class="card-header">
+                        Wearther Information
+                    </div>
+                    <div class="info-body fs-6 pb-2 pt-1">
+                        {{!-- <span><img src="/img/pin.png" class="marker me-2"></span>
+                        <h5 class="mb-0 d-inline">Pune, Maharashtra India</h5> --}}
+                        {{!-- <div>
+                            <img src="https://cdn.weatherapi.com/weather/64x64/day/302.png" class="info-icon"
+                                width="4%">
+                            <span class="descr-1">Moderate rain at times, It is currently </span>
+                            <span class="mx-2 temp actual-temp">30.2</span> &#8451;
+                            <span class="descr-2"> out. It feels like</span>
+                            <span class="mx-2 temp feels-like">32.2</span> &#8451;
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="location">
-            <p></p>
-        </div> --}}
-        <table>
-            <tr>
-                <td><img src="" class="weather-icon"></td>
-                <td><p class="weather-msg" style="display: block;"></p>
-                <p class="error-msg" style="color: red;display:block;"></p></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="location"><p></p></td>
-            </tr>
-        </table>
+        {{>footer}}
     </div>
-    {{>footer}}
+    <script>
+       
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

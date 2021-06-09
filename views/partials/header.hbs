@@ -1,16 +1,40 @@
 <header>
-    <h1>{{title}}</h1>
-    <a href="/">Weather |</a>
-    <a href="/help">Help |</a>
-    <a href="/about">About</a>
+    <div class="container-fluid px-4 pb-1">
+        <div class="title-div mb-2">
+            <img src="/img/sun.png" id="header-logo">
+            <h1 id="title" class="display-4">{{title}}</h1>
+        </div>
+        <nav aria-label="breadcrumb" class="pb-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Weather</a> </li>
+                <li class="breadcrumb-item"><a href="/help">Help</a> </li>
+                <li class="breadcrumb-item"><a href="/about">About</a></li>
+            </ol>
+        </nav>
+    </div>
 </header>
 <style>
-    h1{
-        color: #333333;
+    header div {
+        background-color: #3f3946;
+        color: white;
+        letter-spacing: 2px;
     }
-    a{
+
+    header li a {
         text-decoration: none;
-        color: #888888;
-        margin-right: 0.3%;
+        color: white;
+        font-weight: bold;
     }
+    header #header-logo {
+        vertical-align: top;
+        max-width: 4%;
+        margin-right: 10px;
+    }
+    header #title {
+        font-weight: 900;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
 </style>

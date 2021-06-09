@@ -30,34 +30,76 @@ app.get("/about", (req, res) => {
     res.render("about", { title: "About", name: "Dhananjay Gore" });
 });
 app.get("/weather", (req, res) => {
-    if (!req.query.address) {
-        return res.send({ error: "Please provise address" });
+    if (!req.query.byCoords && !req.query.address) {
+        return res.send({ error: "Please provise location" });
+    } else if (req.query.byCoords && (!req.query.lat || !req.query.long)) {
+        return res.send({ error: "Please provise correct co-ordinates" });
     }
+    // Request for getting place name
+    if (req.query.byCoords) {
+        const latitude = req.query.lat;
+        const longitude = req.query.long;
+        return weather.get_location({ latitude, longitude }, (place) => {
+            if (place.error) return res.send(place);
+            weatherApiCall({ latitude, longitude }, (weatherDataObj = {}, error) => {
+                if (error) return res.send({ error });
+                weatherDataObj.place = place;
+                res.send(weatherDataObj);
+            })
+        });
+    }
+    // Request for getting Geo co-ordinates
     weather.get_coords(req.query.address, (latLong, error) => {
         if (error) return res.send({ error });
-        weather.get_weather(latLong, (weather, error) => {
+        weatherApiCall(latLong, (weatherDataObj = {}, error) => {
             if (error) return res.send({ error });
-            // const description = weather.weather_descriptions;
-            // const temperature = weather.temperature;
-            // const feelsLike = weather.feelslike;
-            const description = weather.condition.text;
-            const temperature = weather.temp_c;
-            const feelsLike = weather.feelslike_c;
-            const forecast = `${description}, It is currently ${temperature} degrees out. It feels like ${feelsLike} degrees out.`;
-            // const weatherIcon = weather.weather_icons[0];
-            const weatherIcon = weather.condition.icon;
-            res.send({
-                description,
-                temperature,
-                feelsLike,
-                address: latLong.placeName,
-                forecast,
-                weatherIcon,
-            });
+            res.send(weatherDataObj);
         });
     });
 });
 app.get("*", (req, res) => {
     res.render("404");
 });
+
+function weatherApiCall(latLong, callback) {
+    weather.get_weather_forecast(latLong, (weather, error) => {
+        if (error) return callback(null, error);
+        const current = weather.current;
+        let forecast = [];
+        weather.forecast.forecastday.forEach((day, index) => {
+            let dayObj = {
+                date: day.date,
+                date_epoch: day.date_epoch,
+                max_temp: day.day.maxtemp_c,
+                descr: day.day.condition.text,
+                icon: day.day.condition.icon,
+                astro: day.astro,
+                chance_of_rain: day.day.daily_chance_of_rain
+            }
+            if (index == 0) {
+                const currentObj = {
+                    description: current.condition.text,
+                    temperature: current.temp_c,
+                    feelsLike: current.feelslike_c,
+                    address: current.location,
+                    forecast: `${current.condition.text}, It is currently ${current.temp_c} degrees out. It feels like ${current.feelslike_c} degrees out.`,
+                    weatherIcon: current.condition.icon,
+                    windSpeed: current.wind_kph,
+                    windDir: current.wind_dir,
+                    humidity: current.humidity,
+                    cloud: current.cloud,
+                    visibility: current.vis_km,
+                    uv: current.uv,
+                    day: current.is_day,
+                    latLong
+                };
+                dayObj.current = currentObj;
+            }
+            forecast.push(dayObj);
+        });
+        callback({ forecast });
+    });
+}
+
 app.listen(port, () => console.log("Server is up and running on " + port + " port!!"));
+

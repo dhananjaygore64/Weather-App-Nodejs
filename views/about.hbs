@@ -5,32 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js" defer></script>
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="icon" type="image/png" sizes="310x310" href="/img/favicons/ms-icon-310x310.png">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <style>
-    .img-circle{
+    .img-box{
         overflow: hidden;
-        border: 10px solid #888888;
-        border-radius: 50px;
-        width: 40%;
-        height: 40vh;
+        display: inline-block;
+        width: 50vh;
+        height: 30vh;
     }
-    .img-circle img{
-        width: 100%;
-        height: 100%;
+    .img-box img{
+        width: 50%;
+        transform: scale(1.14);
+        transform: translate(-11%,-5%);
     }
+    .details p{
+        text-align: justify;
+        margin: 0px;
+    }
+    .about-info{
+        height: 60vh;
+    }
+ 
 </style>
 
 <body>
-    <div class="main-content">
+    <div class="container-fluid main">
         {{>header}}
-        <div class="img-circle">
-            <img src="./img/my-image.jpg" alt="Admin Image">
+        <div class="about-info mx-5 my-5">
+            <div class="row">
+                <div class="img-box text-end col-3">
+                    <img src="img/my-image.jpg" alt="Creator Image">
+                </div>
+                <div class="text-white details p-3 col">
+                   <h2>Dhananjay Gore</h2>
+                    <p class="mt-4">This application is made with Node js and it is responsive thanks to Bootstrap. It uses API from www.weatherapi.com for getting weather details and
+                         www.mapbox.com for getting Geo location and Map services. This application provides Real-Time weather details along with current day Analytics.
+                        It also provides weather forecast of next 2 days, focusing on whether there will be rain or not and also astronomy of sunrise and sunset.
+                        It shows highest temperature and chance of rain in percentage.</p>
+                </div>
+            </div>
         </div>
+        {{>footer}}
     </div>
-    {{>footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 
 </html>

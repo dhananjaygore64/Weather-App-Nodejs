@@ -4,15 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js" defer></script>
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="icon" type="image/png" sizes="310x310" href="/img/favicons/ms-icon-310x310.png">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+
+    {{!-- <script src="/js/script.js" defer></script> --}}
+    <style>
+        .help .row{
+            height: 70vh;
+        }
+    </style>
 </head>
 <body>
-    <div class="main-content">
+    <div class=" help container-fluid">
         {{>header}}
-        <p>There is something helpfull message is here.</p>
+        <div class="row justify-content-md-center ">
+            <div id="map"></div>
+        </div>
+        {{>footer}}
     </div>
-    {{>footer}}
+    <script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZGhhbmFqYXkiLCJhIjoiY2twNW4xanBwMDNmcjJ1czI0ODN5MG4zbCJ9.2G7CKzWdxGrwCr9IKgkgRw';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/mapbox/streets-v11', // style URL
+center: [-74.5, 40], // starting position [lng, lat]
+zoom: 9 // starting zoom
+});
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
