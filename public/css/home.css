@@ -63,7 +63,10 @@ html,body,.main{
 }
 
 .analytics,.form,.forecast{
-    transition: all 0.5s;
+    transition: all 0.8s;
+}
+.analytics,.forecast{
+    padding: 0 45px;
 }
 .analytics , .forecast, .info{
     opacity: 0;
@@ -105,3 +108,49 @@ html,body,.main{
     left: 0px;
 } 
 
+
+
+/* media queries */
+@media only screen and (max-width: 1050px) {
+   
+    .forecast{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .analytics,.form{
+        padding: 0 4vw;
+        width: 47%;
+    }
+    .analytics{
+        margin: 0 0 0 3%;
+    }
+    .form{
+        margin: 0 1% 0 0;
+    }
+    .info{
+        padding: 0 5% !important;
+    }
+    .info-body {
+        font-size: 1.5vh !important;
+        text-align: center !important;
+        padding: 0% !important;
+    }
+    .info-body h5{
+        font-size: 2vh !important ;
+    }
+
+  }
+  @media only screen and (max-width: 600px) {
+   
+    .analytics,.form,.forecast{
+        margin: 0 0;
+        padding: 0 8%;
+    } 
+    .analytics,.form ,.forecast{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .info{
+        padding: 0 8% !important;
+    }
+  }

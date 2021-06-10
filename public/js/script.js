@@ -11,6 +11,10 @@ const tableVisi = document.querySelector('#table-visi');
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 let marker, map;
 
+setTimeout(()=>{
+    document.querySelector('.form').scrollIntoView({behavior: "smooth", block: "center"});
+
+},1000);
 // get weather for user's current location
 navigator.geolocation.getCurrentPosition((location) => {
     const { latitude, longitude } = location.coords;
