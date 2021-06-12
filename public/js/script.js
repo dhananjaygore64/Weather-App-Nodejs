@@ -13,8 +13,8 @@ let marker, map;
 
 setTimeout(()=>{
     document.querySelector('.form').scrollIntoView({behavior: "smooth", block: "center"});
-
 },1000);
+
 // get weather for user's current location
 navigator.geolocation.getCurrentPosition((location) => {
     const { latitude, longitude } = location.coords;
@@ -53,7 +53,7 @@ document.querySelector('.form').addEventListener('submit', (e) => {
         else {
             document.querySelector('.error-msg').style.opacity = 0;
         }
-        const currentDayWeather = data.forecast.shift();
+        const currentDayWeather = data.forecast[0];
         setMapAndMarker(currentDayWeather.current.latLong);
         updateUserLocation(currentDayWeather.current.address);
         updateWeatherInfo(currentDayWeather.current);
@@ -114,6 +114,7 @@ function updateAnalytics(data) {
 }
 
 function updateForecast(dataArray) {
+    console.log(dataArray)
     document.querySelector('.forecast').style.opacity = 1;
     dataArray.forEach((data, index) => {
         const day = days[new Date(data.date).getDay()];

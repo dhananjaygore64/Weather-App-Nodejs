@@ -109,7 +109,6 @@ html,body,.main{
 } 
 
 
-
 /* media queries */
 @media only screen and (max-width: 1050px) {
    
@@ -161,14 +160,11 @@ html,body,.main{
         width: 100%;
         text-align: center;
         margin: 0 !important;
-        /* border: 1px solid black; */
-
       }
       .about-info .img-box img{
         width: 20vh;
         margin-top: 9px;
         border-radius: 8px;
-
       }
       .about-info .details{
         margin-top: 20px !important;
