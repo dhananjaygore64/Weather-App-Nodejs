@@ -97,7 +97,7 @@ html,body,.main{
 }
 .info .info-body .marker{
     width: 2%;
-    vertical-align: baseline;
+    vertical-align: middle;
 }
 .input-form{
     position: relative;
@@ -164,6 +164,11 @@ html,body,.main{
     }
     #map{
         width: 90vw !important;
+    }
+    .info .info-body .marker{
+        width: 2.5vh;
+        margin-top: 2px;
+        vertical-align: baseline;
     }
   }
 
