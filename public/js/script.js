@@ -114,7 +114,6 @@ function updateAnalytics(data) {
 }
 
 function updateForecast(dataArray) {
-    console.log(dataArray)
     document.querySelector('.forecast').style.opacity = 1;
     dataArray.forEach((data, index) => {
         const day = days[new Date(data.date).getDay()];
@@ -145,7 +144,7 @@ function initMap(latLong = {}) {
         container: 'map', // container id
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
         center: [latLong.longitude, latLong.latitude], // starting position [lng, lat]
-        zoom // starting zoom
+        zoom, // starting zoom
     });
     // Create a default Marker and add it to the map.
     marker = new mapboxgl.Marker({ color: '#e34138' }).setLngLat([latLong.longitude, latLong.latitude]).addTo(map);
